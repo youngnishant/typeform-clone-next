@@ -2,7 +2,7 @@ import {
   DropdownSelect,
   DropdownSelectOption,
   QuestionInputText,
-} from "../index";
+} from "../../../index";
 import styles from "./QuestionInputIndustries.module.css";
 import classNames from "classnames";
 import Image from "next/image";

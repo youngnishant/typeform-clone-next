@@ -1,43 +1,43 @@
-import { SET_LAST_NAME } from "@/reducers";
-import { ChangeEventHandler } from "react";
 import {
   BtnContainer,
   Error,
   QuestionInputText,
   QuestionNumHeading,
-} from "../index";
+} from "@/components";
 import classNames from "classnames";
 import styles from "./Question.module.css";
 import Image from "next/image";
+import { ChangeEventHandler } from "react";
+import { SET_FIRST_NAME } from "@/reducers";
 import { useQuestions, useSharedStates } from "@/contexts";
 
-export function LastNameInput() {
+export function FirstNameInput() {
   const { errorMsg: error, setErrorMsg, handleOkClick } = useSharedStates();
   const { state, dispatch } = useQuestions();
 
-  const errorMsg = error.lastName ?? "";
-  const { firstName, lastName } = state;
+  const errorMsg = error.firstName ?? "";
+  const { firstName } = state;
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     errorMsg &&
       setErrorMsg &&
       setErrorMsg((prevValue) => {
-        delete prevValue.lastName;
+        delete prevValue.firstName;
         return prevValue;
       });
 
-    dispatch({ type: SET_LAST_NAME, payload: event.target.value });
+    dispatch({ type: SET_FIRST_NAME, payload: event.target.value });
   };
 
   return (
     <>
-      <QuestionNumHeading questionNum={2}>
-        and your last name, {firstName}? *
+      <QuestionNumHeading questionNum={1}>
+        What&apos;s your first name? *
       </QuestionNumHeading>
 
       <QuestionInputText
         placeholder="Type your answer here..."
-        value={lastName}
+        value={firstName}
         onChange={handleInputChange}
       />
 

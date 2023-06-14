@@ -4,7 +4,7 @@ import {
   QuestionBoxPara,
   QuestionInputIndustries,
   QuestionNumHeading,
-} from "../index";
+} from "@/components";
 import classNames from "classnames";
 import styles from "./Question.module.css";
 import Image from "next/image";

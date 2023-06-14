@@ -6,7 +6,7 @@ import { Question } from "../index";
 export function MainContent() {
   const { questionNum, setShowIndustriesList } = useSharedStates();
   const { prev, now } = questionNum;
-
+  console.log(questionNum);
   useHandleKeypress();
   useHandleScroll();
 

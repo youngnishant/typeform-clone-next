@@ -1,5 +1,9 @@
 import { useSharedStates } from "@/contexts";
-import { BtnContainer, QuestionBoxHeading, QuestionBoxPara } from "../index";
+import {
+  BtnContainer,
+  QuestionBoxHeading,
+  QuestionBoxPara,
+} from "@/components";
 
 export function Intro() {
   const { handleOkClick } = useSharedStates();

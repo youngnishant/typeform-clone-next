@@ -1,4 +1,4 @@
-import { QuestionBoxHeading } from "../index";
+import { QuestionBoxHeading } from "../../index";
 import classNames from "classnames";
 import styles from "./QuestionNumHeading.module.css";
 import Image from "next/image";

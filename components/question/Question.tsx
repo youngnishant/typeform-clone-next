@@ -1,5 +1,7 @@
-import { QuestionProps } from "@/types";
+import { createElement } from "react";
 import classNames from "classnames";
+import { QuestionProps } from "@/types";
+
 import {
   EmailInput,
   FirstNameInput,
@@ -8,7 +10,8 @@ import {
   Intro,
   LastNameInput,
   RoleInput,
-} from "./index";
+} from "@/components/shared/input-fields";
+
 import styles from "./Question.module.css";
 
 export function Question({
@@ -19,25 +22,29 @@ export function Question({
   isRendered,
   type,
 }: QuestionProps) {
+  const renderComponentConfig = {
+    intro: Intro,
+    firstName: FirstNameInput,
+    lastName: LastNameInput,
+    industry: IndustryInput,
+    role: RoleInput,
+    goal: GoalInput,
+    email: EmailInput,
+  };
+
+  const styleConfig = {
+    [styles["slide-out"]]: outView,
+    [styles["slide-in"]]: inView,
+    [styles["out-view__up"]]: outViewSlide === "up",
+    [styles["out-view__down"]]: outViewSlide === "down",
+    [styles["in-view__up"]]: inViewSlide === "up",
+    [styles["in-view__down"]]: inViewSlide === "down",
+    [styles["rendered"]]: isRendered,
+  };
+
   return (
-    <div
-      className={classNames(styles["question-box"], {
-        [styles["slide-out"]]: outView,
-        [styles["slide-in"]]: inView,
-        [styles["out-view__up"]]: outViewSlide === "up",
-        [styles["out-view__down"]]: outViewSlide === "down",
-        [styles["in-view__up"]]: inViewSlide === "up",
-        [styles["in-view__down"]]: inViewSlide === "down",
-        [styles["rendered"]]: isRendered,
-      })}
-    >
-      {type === "intro" && <Intro />}
-      {type === "firstName" && <FirstNameInput />}
-      {type === "lastName" && <LastNameInput />}
-      {type === "industry" && <IndustryInput />}
-      {type === "role" && <RoleInput />}
-      {type === "goal" && <GoalInput />}
-      {type === "email" && <EmailInput />}
+    <div className={classNames(styles["question-box"], styleConfig)}>
+      {createElement(renderComponentConfig[type])}
     </div>
   );
 }

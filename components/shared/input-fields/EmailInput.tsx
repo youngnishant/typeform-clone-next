@@ -1,43 +1,51 @@
+import { useQuestions, useSharedStates } from "@/contexts";
+import classNames from "classnames";
 import {
   BtnContainer,
   Error,
+  QuestionBoxPara,
   QuestionInputText,
   QuestionNumHeading,
-} from "../index";
-import classNames from "classnames";
-import styles from "./Question.module.css";
+} from "../../index";
 import Image from "next/image";
+import styles from "./Question.module.css";
 import { ChangeEventHandler } from "react";
-import { SET_FIRST_NAME } from "@/reducers";
-import { useQuestions, useSharedStates } from "@/contexts";
+import { SET_EMAIL } from "@/reducers";
 
-export function FirstNameInput() {
+export function EmailInput() {
   const { errorMsg: error, setErrorMsg, handleOkClick } = useSharedStates();
   const { state, dispatch } = useQuestions();
 
-  const errorMsg = error.firstName ?? "";
-  const { firstName } = state;
+  const errorMsg = error.email ?? "";
+  const { email } = state;
 
   const handleInputChange: ChangeEventHandler<HTMLInputElement> = (event) => {
     errorMsg &&
       setErrorMsg &&
       setErrorMsg((prevValue) => {
-        delete prevValue.firstName;
+        delete prevValue.email;
         return prevValue;
       });
 
-    dispatch({ type: SET_FIRST_NAME, payload: event.target.value });
+    dispatch({ type: SET_EMAIL, payload: event.target.value });
   };
 
   return (
     <>
-      <QuestionNumHeading questionNum={1}>
-        What&apos;s your first name? *
+      <QuestionNumHeading questionNum={6}>
+        Email you&apos;d like to register with? *
       </QuestionNumHeading>
 
+      <QuestionBoxPara>
+        We will keep all our communications with you through this email. Do
+        check your span inbox if you can&apos;t find our application received
+        email.
+      </QuestionBoxPara>
+
       <QuestionInputText
-        placeholder="Type your answer here..."
-        value={firstName}
+        type="email"
+        placeholder="name@example.com"
+        value={email}
         onChange={handleInputChange}
       />
 
